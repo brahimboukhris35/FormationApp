@@ -17,13 +17,13 @@ BACKEND (Spring Boot)
 1.  Ouvrir le dossier "backend" dans votre IDE (IntelliJ / Eclipse / VSCode).
 2. S'assurer que MySQL est installé et lancé.
 3. Modifier le fichier application.properties si besoin.
-4. Lancer la classe `MonApplication.java` ou exécuter :
-   ./mvnw spring-boot:run
+4. Exécuter dans le dossier backend/formation:
+   ./mvnw spring-boot:run 
 
 FRONTEND (Angular + Nx avec mnrv)
 -------------------------------------
 Pour exécuter le frontend :
 1. Ouvrir le dossier "frontend"
-2. Exécuter `npm install`
+2. Exécuter `npm install` ou ' npm install --legacy-peer-deps' pour ignorer les conflits de versions
 3. Puis `ng serve`
 4. Accéder à http://localhost:4200/
