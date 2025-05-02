@@ -1,0 +1,31 @@
+<body>
+    <header>
+      <h1>Espace - Responsable du centre</h1>
+
+
+        <ul class="compte" type="none" (click)="toggleMenu()">
+            <img src="assets/img/utilisateur_2.png" alt="Compte">
+        </ul>
+      <div class="compte-menu" *ngIf="menuOuvert">
+        <!-- Si l'utilisateur est connecté -->
+        <button class="btn_logout" *ngIf="sessionService.getUserId()" (click)="onLogout()">Déconnexion</button>
+    </div>
+    </header>
+  
+
+    <nav class="sidebar">
+
+        <ul>
+          <li><a (click)="showSection('dashboard')" [class.active]="isActive('dashboard')">Dashboard</a></li>
+        </ul>
+
+      </nav>
+    
+  
+    <main>
+      <app-dashboard *ngIf="isActive('dashboard')"></app-dashboard>
+
+        
+    </main>
+  </body>
+

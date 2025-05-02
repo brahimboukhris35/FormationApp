@@ -1,0 +1,153 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+
+  body {
+    display: flex;
+    font-family: Arial, sans-serif;
+    background-color: linear-gradient(to right, #E3F2FD, #BBDEFB);
+
+  }
+
+
+  header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 200px;
+    right: 0 !important;
+    background: linear-gradient(to right, #64B5F6, #1E88E5);
+    color: white;
+    padding: 1rem;
+    z-index: 1000;
+  }
+  .compte img{
+    cursor: pointer;
+    position: absolute;
+    height: 30px;
+    width: auto;
+    right: 30px;
+    margin: 5px;
+}
+.btn_logout{
+    background-color: red;
+    &:hover{
+        background-color: rgb(158, 3, 3);
+        cursor: pointer;
+    }
+}
+  
+.compte {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+  
+
+  }
+  
+  .compte-menu {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 999;
+  }
+    button {
+      padding: 10px 40px; 
+      width: 200px; 
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+  
+
+    }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background: black;
+    padding-top: 5rem;
+  }
+  .logo{
+    display: flex;
+    justify-content: center;
+  }  
+  .sidebar ul {
+    list-style: none;
+  }
+  
+  .sidebar li {
+    padding: 0.5rem;
+  }
+  
+  .sidebar a {
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    line-height: 30px;
+    width: auto;
+    height: 30px;
+  }
+  
+
+.sidebar a.active {
+
+    background-color: white;
+    color: black;
+    font-weight: bold;
+  }
+  
+  .sidebar a:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+  }
+
+  main {
+    position: absolute;
+    display: flex;
+    margin-left: 200px;     /* Pour laisser la place à la sidebar */
+    padding: 6rem 2rem 2rem 2rem;
+    width: calc(100% - 200px);
+  }
+  
+  section {
+    display: flex;
+    flex-direction: column;  /* Permet à la section de s'adapter et d'occuper l'espace verticalement */
+    flex: 1;                 /* La section prend tout l'espace horizontal restant */
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden;        /* Assure que tout le contenu reste dans la section */
+  }
+app-utilisateur ,app-role,
+app-profil,app-domaine,
+app-structure,app-employeur,
+app-formation,app-formateur,
+app-participant,app-dashboard  {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 8px;
+}

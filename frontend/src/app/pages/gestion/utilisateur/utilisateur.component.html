@@ -1,0 +1,54 @@
+<section id="users">
+    <h2>Gestion des Utilisateurs</h2>
+    <div *ngIf="isSubmittedUtilisateur && utilisateurForm.invalid" class="error-message">
+      Vous devez remplir tous les champs requis correctement.
+    </div>
+    <form [formGroup]="utilisateurForm" (ngSubmit)="onSubmitUtilisateur()">
+        <div>
+          <input type="text" formControlName="login" placeholder="Login" required [ngClass]="{'error': isSubmittedUtilisateur && utilisateurForm.get('login')?.invalid}">
+        </div>
+        <div>
+          <input type="password" formControlName="password" placeholder="Mot de passe" required [ngClass]="{'error': isSubmittedUtilisateur && utilisateurForm.get('password')?.invalid}">
+        </div>
+        <div>
+          <select formControlName="role" required [ngClass]="{'error': isSubmittedUtilisateur && utilisateurForm.get('role')?.invalid}">
+            <option value="null" default>Sélectionnez un rôle</option>
+            <option *ngFor="let role of roles" [value]="role.id">{{ role.nom }}</option>
+          </select>
+        </div>
+        <button class="btn_add" type="submit">{{ isEditing ? 'Mettre à jour' : 'Ajouter' }}</button>
+        <button class="btn_cancel" type="button" (click)="resetFormUtilisateur()" *ngIf="isEditing">Annuler</button>
+    </form>
+    <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Login</th>
+            <th>Mot de passe</th>
+            <th>Rôle</th>
+            <th style="width: 40px;"></th> <!-- Colonne pour Edit -->
+            <th style="width: 40px;"></th> <!-- Colonne pour Delete -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let utilisateur of utilisateurs">
+            <td>{{ utilisateur.id }}</td>
+            <td>{{ utilisateur.login }}</td>
+            <td>{{ utilisateur.password }}</td>
+            <td>{{ utilisateur.role.nom }}</td>
+            <td >
+              <div class="conpteneur">
+                <img src="assets/img/pen.png" alt="Modifier" class="icon-action" (click)="editerUtilisateur(utilisateur)">
+                <span class="content">Modifier</span>
+              </div>
+            </td>
+            <td>
+              <div class="conpteneur">
+                <img src="assets/img/cross.png" alt="Supprimer" class="icon-action" (click)="supprimerUtilisateur(utilisateur.id!)">
+                <span class="content">Supprimer</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+</section>

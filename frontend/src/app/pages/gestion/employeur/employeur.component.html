@@ -1,0 +1,50 @@
+<section id="employeurs">
+    <h2>Gestion des Employeurs</h2>
+    
+    <div *ngIf="isSubmittedEmployeur && employeurForm.invalid" class="error-message">
+      Vous devez remplir tous les champs requis correctement.
+    </div>
+
+    <form [formGroup]="employeurForm" (ngSubmit)="onSubmitEmployeur()">
+      <div>
+        <input 
+          type="text" 
+          formControlName="nomemployeur" 
+          placeholder="Nom de l'employeur" 
+          required
+          [ngClass]="{'error': isSubmittedEmployeur && employeurForm.get('nomemployeur')?.invalid}">
+      </div>
+
+      <button class="btn_add" type="submit">{{ isEditingEmployeur ? 'Mettre à jour' : 'Ajouter' }}</button>
+      <button class="btn_cancel" type="button" (click)="resetEmployeurForm()" *ngIf="isEditingEmployeur">Annuler</button>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom de l'employeur</th>
+          <th style="width: 40px;"></th> <!-- Colonne pour Edit -->
+          <th style="width: 40px;"></th> <!-- Colonne pour Delete -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employeur of employeurs">
+          <td>{{ employeur.id }}</td>
+          <td>{{ employeur.nomemployeur }}</td>
+          <td>
+            <div class="conpteneur">
+              <img src="assets/img/pen.png" alt="Modifier" class="icon-action" (click)="editerEmployeur(employeur)">
+              <span class="content">Modifier</span>
+            </div>
+          </td>
+          <td>
+            <div class="conpteneur">
+              <img src="assets/img/cross.png" alt="Supprimer" class="icon-action" (click)="supprimerEmployeur(employeur.id!)">
+              <span class="content">Supprimer</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</section>

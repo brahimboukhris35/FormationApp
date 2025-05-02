@@ -1,0 +1,71 @@
+<section id="formateurs">
+    <h2>Gestion des Formateurs</h2>
+    <div *ngIf="isSubmittedFormateur && formateurForm.invalid" class="error-message">
+      Vous devez remplir tous les champs requis correctement.
+    </div>
+    <form [formGroup]="formateurForm" (ngSubmit)="onSubmitFormateur()">
+      <div>
+        <input formControlName="nom" placeholder="Nom" required [ngClass]="{'error': isSubmittedFormateur && formateurForm.get('nom')?.invalid}">
+      </div>
+      <div>
+        <input formControlName="prenom" placeholder="Prénom" required [ngClass]="{'error': isSubmittedFormateur && formateurForm.get('prenom')?.invalid}">
+      </div>
+      <div>
+        <input formControlName="email" placeholder="Email" type="email" required [ngClass]="{'error': isSubmittedFormateur && formateurForm.get('email')?.invalid}">
+      </div>
+      <div>
+        <input formControlName="tel" placeholder="Téléphone" type="tel" required [ngClass]="{'error': isSubmittedFormateur && formateurForm.get('tel')?.invalid}">
+      </div>
+      <div>
+        <select formControlName="type" required>
+          <option value="Interne" default>Interne</option>
+          <option value="Externe">Externe</option>
+        </select>
+      </div>
+      <div *ngIf="formateurForm.get('type')?.value === 'Externe'">
+        <select formControlName="employeur">
+          <option value="null" default>Sélectionner un employeur</option>
+          <option *ngFor="let employeur of employeurs" [value]="employeur.id">{{ employeur.nomemployeur }}</option>
+        </select>
+      </div>
+      <button class="btn_add" type="submit">{{ isEditingFormateur ? 'Mettre à jour' : 'Ajouter' }}</button>
+      <button class="btn_cancel" type="button" (click)="resetFormateurForm()" *ngIf="isEditingFormateur">Annuler</button>
+    </form>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Téléphone</th>
+          <th>Type</th>
+          <th>Employeur</th>
+          <th style="width: 40px;"></th> <!-- Colonne pour Edit -->
+          <th style="width: 40px;"></th> <!-- Colonne pour Delete -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let formateur of formateurs">
+          <td>{{ formateur.nom }}</td>
+          <td>{{ formateur.prenom }}</td>
+          <td>{{ formateur.email }}</td>
+          <td>{{ formateur.tel }}</td>
+          <td>{{ formateur.type }}</td>
+          <td>{{ formateur.employeur?.nomemployeur }}</td>
+          <td>
+            <div class="conpteneur">
+              <img src="assets/img/pen.png" alt="Modifier" class="icon-action" (click)="editFormateur(formateur)">
+              <span class="content">Modifier</span>
+            </div>
+          </td>
+          <td>
+            <div class="conpteneur">
+              <img src="assets/img/cross.png" alt="Supprimer" class="icon-action" (click)="deleteFormateur(formateur.id!)">
+              <span class="content">Supprimer</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</section>

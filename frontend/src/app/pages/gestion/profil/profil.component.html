@@ -1,0 +1,41 @@
+<section id="profils">
+    <h2>Gestion des Profils</h2>
+    <div *ngIf="isSubmittedProfil && profilForm.invalid" class="error-message">
+      Vous devez remplir tous les champs requis correctement.
+    </div>
+    <form [formGroup]="profilForm" (ngSubmit)="onSubmitProfil()">
+      <div>
+        <input type="text" formControlName="libelle" placeholder="Libellé du profil" required [ngClass]="{'error': isSubmittedProfil && profilForm.get('libelle')?.invalid}">
+      </div>
+      <button class="btn_add" type="submit">{{ isEditingProfil ? 'Mettre à jour' : 'Ajouter' }}</button>
+      <button class="btn_cancel" type="button" (click)="resetProfilForm()" *ngIf="isEditingProfil">Annuler</button>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Libellé</th>
+          <th style="width: 40px;"></th> <!-- Colonne pour Edit -->
+          <th style="width: 40px;"></th> <!-- Colonne pour Delete -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let profil of profils">
+          <td>{{ profil.id }}</td>
+          <td>{{ profil.libelle }}</td>
+          <td >
+            <div class="conpteneur">
+              <img src="assets/img/pen.png" alt="Modifier" class="icon-action" (click)="editerProfil(profil)">
+              <span class="content">Modifier</span>
+            </div>
+          </td>
+          <td>
+            <div class="conpteneur">
+              <img src="assets/img/cross.png" alt="Supprimer" class="icon-action" (click)="supprimerProfil(profil.id!)">
+              <span class="content">Supprimer</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>

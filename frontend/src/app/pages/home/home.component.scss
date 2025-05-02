@@ -1,0 +1,435 @@
+/******************************begin header************************/
+header {
+    height: 100vh;
+    background-image: url(/assets/img/imgaccueil_2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    image-rendering: auto;
+}
+
+.header{
+    position: relative;
+    display: flex;
+}
+.header div img{
+    height: 60px;
+    width: auto;
+    margin: 10px;
+}
+
+
+
+ul.menu{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 60px; 
+    margin-top: 30px;
+}
+
+
+.link { 
+    text-decoration: none;
+    outline: none;
+    font-size: 14pt;
+    color: white;
+    margin-right: 30px;
+    padding: 15px;
+    width: 150px;
+    text-align: center;
+    cursor:pointer;
+}
+
+.link:hover
+{
+    color: blue;
+    transition: 0.5s;
+}
+
+.login{
+    position: absolute;
+    margin-top: 15px;
+    right: 50px;
+    
+}
+
+.compte img{
+    height: 30px !important;
+    cursor: pointer;
+    width: auto;
+
+}
+
+.compte {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  
+    .compte-icon {
+      cursor: pointer;
+  
+      img {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+  
+  .compte-menu {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 999;
+  
+    button {
+      padding: 10px 40px; 
+      width: 200px; 
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+  
+
+    }
+
+    .btn_login{
+        background: #2ecc71;
+        &:hover {
+            background-color: #27ae60;
+          }
+    }
+    .btn_register{
+        background-color: #007bff;
+        &:hover {
+            background-color: #0056b3;
+          }
+    }
+    .btn_logout{
+        background-color: red;
+        &:hover {
+            background-color: rgb(189, 2, 2);
+          }
+    }
+
+
+  }
+  
+/****************************** end header ************************/
+
+/****************************** begin section [accueil] ************************/
+
+
+
+
+
+
+/****************************** Begin Apropos ************************/
+
+section.About
+{
+    
+    position: relative;
+    height: 130vh;
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Title_About
+{
+    color: white;
+    font-size: 18pt;
+    width: 20%;
+    height: 50px;
+    background-color: #87CEEB ;
+    border-radius: 50px;
+    top: 5%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.Content_About {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px; /* Espacement entre les blocs */
+    flex-wrap: wrap; /* Pour s'adapter en responsive */
+}
+
+.About > article
+{
+    width: 80%;
+    height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    
+    
+}
+.About > article p
+{
+    width: 500px;
+    height: 300px; 
+}
+
+
+
+
+.part1, .part2, .part3 {
+    display: flex;
+    flex: 1; /* Chaque bloc prendra une part égale */
+    width: 20%; 
+    height: 400px; 
+    min-width: 250px; /* Largeur minimale pour éviter l'écrasement sur petits écrans */
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    justify-content: flex-start;
+    padding: 50px;
+}
+
+.partie1{top: 15%;}
+.partie2{top: 42.5%;}
+.partie3{top: 70%;}
+
+
+.paragraph
+{
+
+    width: 600px;
+    text-align: justify;
+    color: black;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    
+}
+.paragraph img{
+    display: block;
+    margin: 0 auto;
+    height: 100px;
+    width: auto;
+    
+} 
+
+.paragraph p {
+    text-align: center;       /* Centre le texte */
+    font-size: 24px;          /* Augmente la taille du texte (modifiable selon ton besoin) */
+    font-weight: bold;        /* Optionnel : rend le texte plus visible */
+    margin: 20px 0;           /* Optionnel : espace autour */
+  }
+
+/****************************** End Apropos ************************/
+
+
+/****************************** Begin Contact ************************/
+
+
+section.Contact
+{
+    height: 100vh;
+    background-image: url(/assets/img/fond_contact.jpeg);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.formulaire
+{
+    color: white;
+    width: 60%;
+    height: 60%;
+    position: absolute;
+    background-color:rgba(0,0,0,0.5);
+    border-radius: 20px;
+    border-style: solid;
+    border-color: white;
+    border-width:2px ;
+     
+
+}
+
+h2[for="titre_forume"]
+{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top:30px ;
+    
+
+}
+
+label[for="name"]
+{
+    position: absolute;
+    margin: 0 40px;
+    top: 90px;
+
+}
+
+#name
+{
+    position: absolute;
+    width: 60%;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: white;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0,0,0,0);
+    top:90px;
+    padding: 0 20px;
+
+}
+
+label[for="email"]
+{
+    position: absolute;
+    margin: 0 40px;
+    top: 140px;
+
+}
+
+#email
+{
+    position: absolute;
+    width: 60%;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: white;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0,0,0,0);
+    top: 140px;
+    padding: 0 20px;
+
+}
+
+label[for="message"] 
+{
+    position: absolute;
+    margin: 20px 40px;
+    top: 43%;
+    
+}
+
+#message
+{
+    color: white;
+    position: absolute;
+    bottom:100px ;
+    width: 60%;
+    height: 25%;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: white;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0,0,0,0);
+    padding: 20px;
+
+}
+
+.bouton_envoyer 
+{
+    color: white;
+    width: 150px;
+    height: 30px;
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: white;
+    transition-duration: 1s;
+    background-color: rgba(255,255,255,0);
+}
+.bouton_envoyer:hover 
+{
+    filter: brightness(0.5);
+}
+
+
+/****************************** End Contact ************************/
+  
+/****************************** Begin footer ************************/
+footer
+{
+    height: 40vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image_footer
+{
+    top: 10px;
+    position: absolute;
+    width: 150px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+
+
+footer > ul
+{
+    width: 30%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 10px;
+    right: 35%;
+    
+
+}
+
+.logo_footer {
+    width:40px;
+    margin: 0 50px;
+    cursor: pointer;
+    transition-duration: 10s;
+    
+
+}
+
+
+.logo_footer_ul > li
+{
+    
+    margin: 0 10px;
+    
+}
+
+#facebook:hover{content: url(/assets/img/logofooter/logo_facebook_sombre.png);}
+#twitter:hover{content: url(/assets/img/logofooter/logo_twitter_sombre.png);}
+#insta:hover{content: url(/assets/img/logofooter/logo_inta_sombre.png);}
+#in:hover{content:url(/assets/img/logofooter/logo_in_sombre.png)}
+
+
+/****************************** End footer ************************/

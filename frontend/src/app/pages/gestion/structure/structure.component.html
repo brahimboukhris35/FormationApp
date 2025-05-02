@@ -1,0 +1,41 @@
+<section id="structures">
+    <h2>Gestion des Structures</h2>
+    <div *ngIf="isSubmittedStructure && structureForm.invalid" class="error-message">
+      Vous devez remplir tous les champs requis correctement.
+    </div>
+    <form [formGroup]="structureForm" (ngSubmit)="onSubmitStructure()">
+      <div>
+        <input type="text" formControlName="libelle" placeholder="Libellé de la structure" required [ngClass]="{'error': isSubmittedStructure && structureForm.get('libelle')?.invalid}">
+      </div>
+      <button class="btn_add" type="submit">{{ isEditingStructure ? 'Mettre à jour' : 'Ajouter' }}</button>
+      <button class="btn_cancel" type="button" (click)="resetStructureForm()" *ngIf="isEditingStructure">Annuler</button>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Libellé</th>
+          <th style="width: 40px;"></th> <!-- Colonne pour Edit -->
+          <th style="width: 40px;"></th> <!-- Colonne pour Delete -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let structure of structures">
+          <td>{{ structure.id }}</td>
+          <td>{{ structure.libelle }}</td>
+          <td >
+            <div class="conpteneur">
+              <img src="assets/img/pen.png" alt="Modifier" class="icon-action" (click)="editerStructure(structure)">
+              <span class="content">Modifier</span>
+            </div>
+          </td>
+          <td>
+            <div class="conpteneur">
+              <img src="assets/img/cross.png" alt="Supprimer" class="icon-action" (click)="supprimerStructure(structure.id!)">
+              <span class="content">Supprimer</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</section>

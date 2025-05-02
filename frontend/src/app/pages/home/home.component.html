@@ -1,0 +1,118 @@
+<body>
+    <header>
+        <div class="header">
+            <div>
+                <img src="assets/img/logo.jpg" alt="Logo">
+            </div>
+            <div class="menu"> 
+                <nav>
+                    <ul class="menu" type="none">
+                        <li><a class="link" href="#Accueil">Accueil</a></li>
+                        <li><a class="link" href="#About">A propos</a></li>
+                        <li><a class="link" href="#Contact">Contact</a> </li>
+                    
+                    </ul>
+                </nav>
+            </div>
+            <div class='login'>
+                <nav > 
+                <ul class="compte" type="none" (click)="toggleMenu()">
+                    <img src="assets/img/utilisateur_2.png" alt="Compte">
+                    
+                    
+                </ul>
+                </nav>
+            <!-- Menu déroulant -->
+            <div class="compte-menu" *ngIf="menuOuvert">
+                <button class="btn_login" *ngIf="!sessionService.getUserId()" (click)="onLogin()">Se connecter </button>
+            
+                <!-- Si l'utilisateur est connecté -->
+                <button class="btn_space" *ngIf="sessionService.getUserId()" (click)="onMyEspace()">Mon espace</button>
+                <button class="btn_logout" *ngIf="sessionService.getUserId()" (click)="onLogout()">Déconnexion</button>
+            </div>
+                
+            </div>
+        </div>
+    </header>  
+
+    <section class="accueil">
+
+
+    </section>
+
+    <section class="About" id="About">
+        <div class="Title_About">A propos</div>
+        <div class="Content_About">
+            <article class="part1">
+                <div class="paragraph">
+                    <img src="assets/img/objectif.png" alt="">
+                    <P>Objectif</P>
+                    L'application de gestion de formation continue a été conçue pour répondre 
+                    aux besoins croissants du centre de formation « Excellent Training » de 
+                    la société Green Building. Elle vise à moderniser et digitaliser les processus 
+                    de planification, de gestion, de suivi et d’évaluation des formations professionnelles.
+                    </div>
+            </article>
+            <article class="part2">
+                <div class="paragraph">
+                    <img src="assets/img/fonctionnalite.png" alt="">
+                    <p>Fonctionnalités</p>
+                    Grâce à cette solution web, les responsables et les utilisateurs peuvent :
+                    <br>Centraliser toutes les informations relatives aux formations, formateurs et participants .
+                    <br>Gérer efficacement les plannings et les ressources humaines associées aux sessions de formation .
+                    <br>Suivre les statistiques par domaine ou structure, et évaluer l’impact des formations sur le développement des compétences .
+                    <br>Accéder à une interface conviviale, sécurisée et accessible selon le rôle de chaque utilisateur (utilisateur simple, responsable ou administrateur).
+                </div>            
+            </article>
+            <article class="part3">
+                
+                <div class="paragraph">
+                    <img src="assets/img/vision.png" alt="">
+                    <P>Vision</P>
+                    Notre objectif est de fournir un outil intuitif, fiable et évolutif, permettant au centre
+                    de formation d'augmenter sa productivité, de réduire les tâches manuelles répétitives, 
+                    et de valoriser les compétences de son personnel à travers un système de gestion moderne et performant.
+                
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="Contact" id="Contact">
+        <div class="formulaire">
+            <h2 for="titre_forume" >Contactez-nous</h2>
+            <form>
+                <div>
+                <label for="name">Nom:</label>
+                <input type="text" id="name" name="name" required placeholder="tapez votre nom ici" style="color: white;" >
+                </div>
+                <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="tapez votre email ici" style="color: white;">
+                </div>
+                <div>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required placeholder="tapez votre requête ici" style="color: white;"></textarea>
+                </div>
+                <button class="bouton_envoyer" type="submit">Envoyer</button>
+            </form>
+    </div>
+
+    </section>
+
+
+    <footer>
+        <img class="image_footer" src="assets/img/logo.jpg" alt="">
+        <ul class="logo_footer_ul" type="none">
+            <li><img class="logo_footer" src="assets/img/logofooter/logo_facebook.png" id="facebook"></li>
+            <li><img class="logo_footer" src="assets/img/logofooter/logo_twitter.png" id="twitter"></li>
+            <li><img class="logo_footer" src="assets/img/logofooter/logo_insta.png" id="insta"></li>
+            <li><img class="logo_footer" src="assets/img/logofooter/logo_in.png" id="in"></li>
+        </ul>
+    </footer>
+
+
+</body>
+
+
+

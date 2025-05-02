@@ -1,0 +1,38 @@
+<body>
+    <header>
+      <h1>Espace - Utilisateur</h1>
+
+
+        <ul class="compte" type="none" (click)="toggleMenu()">
+            <img src="assets/img/utilisateur_2.png" alt="Compte">
+        </ul>
+      <div class="compte-menu" *ngIf="menuOuvert">
+        <!-- Si l'utilisateur est connecté -->
+        <button class="btn_logout" *ngIf="sessionService.getUserId()" (click)="onLogout()">Déconnexion</button>
+    </div>
+    </header>
+  
+
+    <nav class="sidebar">
+        <!-- 
+        <div class="logo">
+            <img src="assets/img/logo.jpg" alt="Logo">
+        </div>
+        -->
+
+        <ul>
+          <li><a (click)="showSection('formation')" [class.active]="isActive('formation')">Formations</a></li>
+          <li><a (click)="showSection('formateur')" [class.active]="isActive('formateur')">Formateur</a></li>
+          <li><a (click)="showSection('participant')" [class.active]="isActive('participant')">Participants</a></li>
+        </ul>
+
+      </nav>
+    
+  
+    <main>
+      <app-formation *ngIf="isActive('formation')"></app-formation>
+      <app-formateur *ngIf="isActive('formateur')"></app-formateur>
+      <app-participant *ngIf="isActive('participant')"></app-participant>
+    </main>
+  </body>
+

@@ -1,0 +1,26 @@
+<body>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form>
+                <h1>Inscription</h1>
+                <span>Inscrivez-vous avec votre adresse e-mail</span>
+                <input type="text" placeholder="Nom utilisateur">
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Mot de passe">
+                <button (click)="Register()">Inscription</button>
+            </form>
+        </div>
+        
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-right">
+                    <h1>Bienvenue !</h1>
+                    <p>Si vous avez déjà un compte, connectez-vous ici</p>
+                    <button (click)="onLogin()" class="hidden" id="register">Connexion</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>

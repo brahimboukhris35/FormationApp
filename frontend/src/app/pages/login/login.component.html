@@ -1,0 +1,26 @@
+<body>
+
+    <div class="container" id="container">
+        <div class="form-container sign-in">
+            <form>
+                <h1>Connexion</h1>
+                <span>Utilisez votre nom utilisateur et votre mot de passe</span>
+                <input name="login"  [(ngModel)]="login" type="login" placeholder="nom utilisateur">
+                <input name="password" [(ngModel)]="password" type="password" placeholder="Mot de passe">
+                <a href="#">Mot de passe oublié ?</a>
+                <button type="submit" (click)="Login()">Connexion</button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-right">
+                    <h1>Bienvenue !</h1>
+                    <p>Si vous n'avez pas de compte, faites une demande ici</p>
+                    <button (click)="onRegister()" class="hidden" id="register">faire une demande</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>

@@ -1,0 +1,50 @@
+<body>
+    <header>
+      <h1>Espace - Administrateur</h1>
+
+
+        <ul class="compte" type="none" (click)="toggleMenu()">
+            <img src="assets/img/utilisateur_2.png" alt="Compte">
+        </ul>
+      <div class="compte-menu" *ngIf="menuOuvert">
+        <button class="btn_logout" *ngIf="sessionService.getUserId()" (click)="onLogout()">Déconnexion</button>
+      </div>
+    </header>
+    <nav class="sidebar">
+        <ul>
+          <li><a (click)="showSection('dashboard')" [class.active]="isActive('dashboard')">Dashboard</a></li>
+          <li><a (click)="showSection('role')" [class.active]="isActive('role')">Rôle</a></li>
+          <li><a (click)="showSection('users')" [class.active]="isActive('users')">Utilisateurs</a></li>
+          <li><a (click)="showSection('domaine')" [class.active]="isActive('domaine')">Domaines</a></li>
+          <li><a (click)="showSection('profil')" [class.active]="isActive('profil')">Profils</a></li>
+          <li><a (click)="showSection('structure')" [class.active]="isActive('structure')">Structures</a></li>
+          <li><a (click)="showSection('employeur')" [class.active]="isActive('employeur')">Employeurs</a></li>
+          <li><a (click)="showSection('formateur')" [class.active]="isActive('formateur')">Formateurs</a></li>
+          <li><a (click)="showSection('formation')" [class.active]="isActive('formation')">Formations</a></li>
+          <li><a (click)="showSection('participant')" [class.active]="isActive('participant')">Participants</a></li>
+        </ul>
+
+      </nav>
+    
+  
+    <main>
+
+    <app-dashboard *ngIf="isActive('dashboard')"></app-dashboard>
+    <app-utilisateur *ngIf="isActive('users')"></app-utilisateur>
+    <app-role *ngIf="isActive('role')"></app-role>
+    <app-profil *ngIf="isActive('profil')"></app-profil>
+    <app-domaine *ngIf="isActive('domaine')"></app-domaine>
+    <app-structure *ngIf="isActive('structure')"></app-structure>
+    <app-employeur *ngIf="isActive('employeur')"></app-employeur>
+    <app-formation *ngIf="isActive('formation')"></app-formation>
+    <app-formateur *ngIf="isActive('formateur')"></app-formateur>
+    <app-participant *ngIf="isActive('participant')"></app-participant>
+            
+       
+    
+
+          
+      
+  </main>
+</body>
+

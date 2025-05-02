@@ -1,0 +1,192 @@
+<section id="formations">
+    <h2>Gestion des Formations</h2>
+    <div *ngIf="isSubmittedFormation && formationForm.invalid" class="error-message">
+      Vous devez remplir tous les champs requis correctement.
+    </div>
+    
+    <!-- Formulaire pour créer ou modifier une formation -->
+    <form [formGroup]="formationForm" (ngSubmit)="onSubmitFormation()">
+      <div>
+        <input formControlName="titre" placeholder="Titre" required [ngClass]="{'error': isSubmittedFormation && formationForm.get('titre')?.invalid}">
+      </div>
+      <div>
+        <input formControlName="annee" placeholder="Année" type="number" required [ngClass]="{'error': isSubmittedFormation && formationForm.get('annee')?.invalid}">
+      </div>
+      <div>
+        <input formControlName="duree" placeholder="Durée (jours)" type="number" required [ngClass]="{'error': isSubmittedFormation && formationForm.get('duree')?.invalid}">
+      </div>
+      <div>
+        <input formControlName="budget" placeholder="Budget" type="number" required [ngClass]="{'error': isSubmittedFormation && formationForm.get('budget')?.invalid}">
+      </div>
+      <div>
+        <select formControlName="domaine" required [ngClass]="{'error': isSubmittedFormation && formationForm.get('domaine')?.invalid}">
+          <option value="null" default>Sélectionner un domaine</option>
+          <option *ngFor="let domaine of domaines" [value]="domaine.id">{{ domaine.libelle }}</option>
+        </select>
+      </div>
+      
+      <button class="btn_add" type="submit">{{ isEditing ? 'Mettre à jour' : 'Ajouter' }}</button>
+      <button class="btn_cancel" type="button" (click)="resetFormFormation()" *ngIf="isEditing">Annuler</button>
+    </form>
+  
+    <!-- Tableau des formations -->
+    <table>
+      <thead>
+        <tr>
+          <th>Titre</th>
+          <th>Année</th>
+          <th>Durée</th>
+          <th>Budget</th>
+          <th>Domaine</th>
+          <th style="width: 40px;"></th> <!-- Colonne pour Edit -->
+          <th style="width: 40px;"></th> <!-- Colonne pour Delete -->
+          <th style="width: 40px;"></th> <!-- Colonne pour Edit -->
+          <th style="width: 40px;"></th> <!-- Colonne pour Delete -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let formation of formations">
+          <td>{{ formation.titre }}</td>
+          <td>{{ formation.annee }}</td>
+          <td>{{ formation.duree }} jours</td>
+          <td>{{ formation.budget }} TND</td>
+          <td>{{ formation.domaine?.libelle}}</td>
+          <td >
+            <div class="conpteneur">
+              <img src="assets/img/plus.png" alt="Ajouter" class="icon-action" (click)="ouvrirChoixAssignation(formation.id!)">
+              <span class="content">Ajouter</span>
+            </div>
+          </td>
+          <td>
+            <div class="conpteneur">
+              <img src="assets/img/vision.png" alt="visualiser" class="icon-action" (click)="ouvrirModalAfficher(formation.id!)">
+              <span class="content">visualiser</span>
+            </div>
+          </td>
+          <td >
+            <div class="conpteneur">
+              <img src="assets/img/pen.png" alt="Modifier" class="icon-action" (click)="editFormation(formation)">
+              <span class="content">Modifier</span>
+            </div>
+          </td>
+          <td>
+            <div class="conpteneur">
+              <img src="assets/img/cross.png" alt="Supprimer" class="icon-action" (click)="deleteFormation(formation.id!)">
+              <span class="content">Supprimer</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+    <!-- Modal de confirmation de suppression -->
+  <div *ngIf="showConfirmationModal" class="modal">
+    <div class="modal-content">
+      <h2>Confirmation</h2>
+      <p>Êtes-vous sûr de vouloir supprimer ?</p>
+      <div class="btn-group">
+        <button class="btn_confirm" (click)="confirmerSuppression()">Oui</button>
+        <button class="btn_cancel" (click)="annulerSuppression()">Non</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div *ngIf="showModal" class="modal">
+    <div class="modal-content">
+      <h2>Assigner à la formation</h2>
+      <p>Que souhaitez-vous assigner ?</p>
+      
+      <button class="btn_assigner" (click)="ouvrirModalParticipant()">Participant</button>
+      <button class="btn_assigner" (click)="ouvrirModalFormateur()">Formateur</button>
+
+      <button id="btn_close_model" class="close" (click)="fermerModal()">Fermer</button>
+    </div>
+  </div>
+  <!-- Modal pour Assigner un Participant -->
+  <div *ngIf="showModalParticipant" class="modal">
+    <div class="modal-content">
+      <h2 style="margin-bottom: 20px;">Assigner un Participant à la formation</h2>
+      <div *ngIf="isSubmittedParticipant && !participantSelection" class="error-message">
+        Veuillez sélectionner un participant.
+      </div>
+      <select [(ngModel)]="participantSelection" [ngClass]="{'error': isSubmittedParticipant && (participantSelection== null)}">
+        <option [value]="null" default>- selectionner un participant -</option>            
+        <option *ngFor="let participant of participantsDisponibles" [value]="participant.id">{{ participant.nom }} {{ participant.prenom }}</option>
+      </select>
+      <button (click)="assignerParticipant()">Assigner un participant</button>
+      <button style="margin-top: 20px;" class="close" (click)="fermerModalParticipant()">Fermer</button>
+    </div>
+  </div>
+
+  <!-- Modal pour Assigner un Formateur -->
+  <div *ngIf="showModalFormateur" class="modal">
+    <div class="modal-content">
+      <h2 style="margin-bottom: 20px;">Assigner un Formateur à la formation</h2>
+      <div *ngIf="isSubmittedFormateur && !formateurSelection" class="error-message">
+        Veuillez sélectionner un formateur.
+      </div>
+      <select [(ngModel)]="formateurSelection" [ngClass]="{'error': isSubmittedFormateur && (formateurSelection == null)}">
+        <option [value]="null" default>- selectionner un Formateur -</option>
+        <option *ngFor="let formateur of formateursDisponibles" [value]="formateur.id">{{ formateur.nom }} {{ formateur.prenom }}</option>
+      </select>
+      <button (click)="assignerFormateur()">Assigner Formateur</button>
+      <button style="margin-top: 20px;" class="close" (click)="fermerModalFormateur()">Fermer</button>
+    </div>
+  </div>
+
+  <!-- Modal d'affichage -->
+
+  <div *ngIf="isModalAfficherOuvert" class="modal modal-affichage">
+    <div class="modal-content modal-content-affichage">
+      <h2>Participants et Formateurs de la Formation</h2>
+      <table class="tableau-formateur" style=" width: 80%; margin: 50px auto;">
+        <thead>
+          <tr>
+            <th>Formateur</th>
+            <th>Email</th>
+            <th>Type</th>
+            <th style="width: 40px;"></th> <!-- Colonne pour Delete -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let formateursAssigne of formateursAssignes">
+            <td>{{ formateursAssigne.formateur.nom }} {{ formateursAssigne.formateur.prenom }}</td>
+            <td>{{ formateursAssigne.formateur.email }}</td>
+            <td>{{ formateursAssigne.formateur.type }}</td>
+            <td>
+              <div class="conpteneur">
+                <img src="assets/img/cross.png" alt="Supprimer" class="icon-action" (click)="supprimerFormateurAssigne(formateursAssigne.idAssignement)">
+                <span class="content">Supprimer</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="tableau-participant" style=" width: 80%; margin: 20px auto;">
+        <thead>
+          <tr>
+            <th>Participant</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th style="width: 40px;"></th> <!-- Colonne pour Delete -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let participantsAssigne of participantsAssignes">
+            <td>{{ participantsAssigne.participant.nom }} {{ participantsAssigne.participant.prenom }}</td>
+            <td>{{ participantsAssigne.participant.email }}</td>
+            <td>{{ participantsAssigne.participant.tel }}</td>
+            <td>
+              <div class="conpteneur">
+                <img src="assets/img/cross.png" alt="Supprimer" class="icon-action" (click)="supprimerParticipantAssigne(participantsAssigne.idAssignement)">
+                <span class="content">Supprimer</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button id="btn_close_model_affiche" class="close" (click)="fermerModalAfficher()">Fermer</button>
+  
+    </div>
+</div>

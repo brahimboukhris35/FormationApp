@@ -1,0 +1,41 @@
+<section id="domaines">
+    <h2>Gestion des Domaines</h2>
+    <div *ngIf="isSubmittedDomaine && domaineForm.invalid" class="error-message">
+        Vous devez remplir tous les champs requis correctement.
+    </div>
+    <form [formGroup]="domaineForm" (ngSubmit)="onSubmitDomaine()">
+        <div>
+        <input type="text" formControlName="libelle" placeholder="Libellé du domaine" required [ngClass]="{'error': isSubmittedDomaine && domaineForm.get('libelle')?.invalid}">
+        </div>
+        <button class="btn_add" type="submit">{{ isEditingDomaine ? 'Mettre à jour' : 'Ajouter' }}</button>
+        <button class="btn_cancel" type="button" (click)="resetDomaineForm()" *ngIf="isEditingDomaine">Annuler</button>
+    </form>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Libellé</th>
+            <th style="width: 40px;"></th> <!-- Colonne pour Edit -->
+            <th style="width: 40px;"></th> <!-- Colonne pour Delete -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let domaine of domaines">
+            <td>{{ domaine.id }}</td>
+            <td>{{ domaine.libelle }}</td>
+            <td >
+            <div class="conpteneur">
+                <img src="assets/img/pen.png" alt="Modifier" class="icon-action" (click)="editerDomaine(domaine)">
+                <span class="content">Modifier</span>
+            </div>
+            </td>
+            <td>
+            <div class="conpteneur">
+                <img src="assets/img/cross.png" alt="Supprimer" class="icon-action" (click)="supprimerDomaine(domaine.id!)">
+                <span class="content">Supprimer</span>
+            </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>

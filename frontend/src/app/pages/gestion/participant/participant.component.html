@@ -1,0 +1,73 @@
+<section id="participants">
+    <h2>Gestion des Participants</h2>
+    <div *ngIf="isSubmittedParticipant && participantForm.invalid" class="error-message">
+      Vous devez remplir tous les champs requis correctement.
+    </div>
+      <!-- Formulaire pour ajouter ou modifier un participant -->
+    <form [formGroup]="participantForm" (ngSubmit)="onSubmitParticipant()">
+      <div>
+        <input formControlName="nom" placeholder="Nom" required [ngClass]="{'error': isSubmittedParticipant && participantForm.get('nom')?.invalid}">
+      </div>
+      <div>
+        <input formControlName="prenom" placeholder="Prénom" required [ngClass]="{'error': isSubmittedParticipant && participantForm.get('prenom')?.invalid}">
+            </div>
+            <div>
+        <input formControlName="email" placeholder="Email" type="email" required [ngClass]="{'error': isSubmittedParticipant && participantForm.get('email')?.invalid}">
+      </div>
+      <div>
+        <input formControlName="tel" placeholder="Téléphone" type="tel" required [ngClass]="{'error': isSubmittedParticipant && participantForm.get('tel')?.invalid}">
+      </div>
+      <div>
+        <select formControlName="structure" placeholder="structure" required [ngClass]="{'error': isSubmittedParticipant && participantForm.get('structure')?.invalid}">
+          <option value="null" default>Sélectionner une structure</option>
+          <option *ngFor="let structure of structures" [ngValue]="structure.id">{{ structure.libelle }}</option>
+        </select>
+      </div>
+      <div>
+        <select formControlName="profil" required [ngClass]="{'error': isSubmittedParticipant && participantForm.get('profil')?.invalid}">
+          <option value="null" default>Sélectionner un profil</option>
+          <option *ngFor="let profil of profils" [ngValue]="profil.id">{{ profil.libelle }}</option>
+        </select>
+      </div>
+      <button class="btn_add" type="submit">{{ isEditingParticipant ? 'Mettre à jour' : 'Ajouter' }}</button>
+      <button class="btn_cancel" type="button" (click)="resetParticipantForm()" *ngIf="isEditingParticipant">Annuler</button>
+    </form>
+    
+    <!-- Tableau des participants -->
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Téléphone</th>
+          <th>Structure</th>
+          <th>Profil</th>
+          <th style="width: 40px;"></th> <!-- Colonne pour Edit -->
+          <th style="width: 40px;"></th> <!-- Colonne pour Delete -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let participant of participants">
+          <td>{{ participant.nom }}</td>
+          <td>{{ participant.prenom }}</td>
+          <td>{{ participant.email }}</td>
+          <td>{{ participant.tel }}</td>
+          <td>{{ participant.structure?.libelle }}</td>
+          <td>{{ participant.profil?.libelle }}</td>
+          <td >
+            <div class="conpteneur">
+              <img src="assets/img/pen.png" alt="Modifier" class="icon-action" (click)="editParticipant(participant)">
+              <span class="content">Modifier</span>
+            </div>
+          </td>
+          <td>
+            <div class="conpteneur">
+              <img src="assets/img/cross.png" alt="Supprimer" class="icon-action" (click)="deleteParticipant(participant.id!)">
+              <span class="content">Supprimer</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</section>

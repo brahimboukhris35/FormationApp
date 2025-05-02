@@ -1,0 +1,28 @@
+<section id="dashboard">
+    <h2>Dashboard</h2>
+      
+        <div class="card-grid">
+          <div class="card">Utilisateur: {{ stats.utilisateurs }}</div>
+          <div class="card">Formations: {{ stats.formations }}</div>
+          <div class="card">Formateurs: {{ stats.formateurs }}</div> 
+        </div>
+        
+    <div class="charts" style="display: flex; flex-direction: column; gap: 20px;">
+      <div class="chart-block">
+        <h3>Répartition des Utilisateurs par Rôle</h3>
+        <canvas id="chartDomaine"></canvas>
+      </div>
+
+      <div class="chart-block">
+        <h3>Nombre de Formations par Domaine</h3>
+        <canvas id="chartFormation"></canvas>
+      </div>
+
+      <div class="chart-block">
+        <h3>Répartition des Formateurs (Interne/Externe)</h3>
+        <canvas id="chartFormateur"></canvas>
+      </div>
+
+    </div>
+      
+</section>
